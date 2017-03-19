@@ -5,6 +5,7 @@ machine:
     ZANAVI_VERSION_HASH: f5937abeb406d37d3fd6b9f805ae6a448ffe7063
     _MT_BUILDDIR: /home/ubuntu/maptool_build
     _MT_RUNDIR: /home/ubuntu/maptool_run
+    _MT_MEM: 3000
 ###############################
 #   build type:
 #
@@ -98,7 +99,7 @@ compile:
 test:
   override:
     - . ~/_bt3; wget http://download.geofabrik.de/europe/switzerland-latest.osm.bz2 -O ~/testmap.osm.bz2
-    - . ~/_bt3; cd "$_MT_RUNDIR" ; bzcat ~/testmap.osm.bz2 | "$_MT_BUILDDIR"/navit/maptool/maptool -n -U -S 600000000 testmap.bin
+    - . ~/_bt3; cd "$_MT_RUNDIR" ; bzcat ~/testmap.osm.bz2 | "$_MT_BUILDDIR"/navit/maptool/maptool -n -U -S "$_MT_MEM""000000" testmap.bin
     - ls -al "$_MT_RUNDIR"
     - ls -alR "$_MT_RUNDIR"
     - ls -al "$_MT_RUNDIR"/testmap.bin
