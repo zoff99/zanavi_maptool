@@ -81,6 +81,7 @@ compile:
     - cd "$_MT_BUILDDIR" ; . ~/cflags.txt ; export CC="gcc" ; export CXX="g++" ; ~/zanavi_maptool/zanavi/configure --disable-samplemap --disable-graphics --disable-graphics-gtk-drawing-area --disable-graphics-opengl --disable-svg --disable-svg2png --disable-binding-python --disable-fastmath --disable-gui-gtk --disable-gui-win32 --disable-gui-qml --disable-gui-internal
     - echo '' > /home/ubuntu/zanavi_maptool/zanavi/navit/coffeecatch.c
     - echo '' > /home/ubuntu/zanavi_maptool/zanavi/navit/coffeejni.c
+    - sudo ln -sf /usr/include/freetype2 /usr/include/freetype
     - cd "$_MT_BUILDDIR" ; . ~/cflags.txt ; export CC="gcc" ; export CXX="g++" ; cd navit && make && make version.h
     - cd "$_MT_BUILDDIR" ; . ~/cflags.txt ; export CC="gcc" ; export CXX="g++" ; cd navit/maptool && make
 test:
