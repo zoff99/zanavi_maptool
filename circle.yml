@@ -1,7 +1,6 @@
 machine:
   timezone:
     Europe/Berlin
-
   environment:
     ZANAVI_VERSION_HASH: 137eb43cb57b941f64004cd184fecabf25ef8be5
     _MT_BUILDDIR: /home/ubuntu/maptool_build
