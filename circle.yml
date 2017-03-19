@@ -99,6 +99,13 @@ test:
   override:
     - . ~/_bt3; wget http://download.geofabrik.de/europe/switzerland-latest.osm.bz2 -O ~/testmap.osm.bz2
     - . ~/_bt3; cd "$_MT_RUNDIR" ; bzcat ~/testmap.osm.bz2 | "$_MT_BUILDDIR"/navit/maptool/maptool -n -U -S 600000000 testmap.bin
+    - ls -al "$_MT_RUNDIR"
+    - ls -alR "$_MT_RUNDIR"
+    - ls -al "$_MT_RUNDIR"/testmap.bin
+    - ls -alh "$_MT_RUNDIR"/testmap.bin
+    - unzip -t "$_MT_RUNDIR"/testmap.bin ; exit 0 # just for a crude basic test, maps are not really zip-files!
+    - mkdir -p $CIRCLE_ARTIFACTS/maps/
+    - cp -v "$_MT_RUNDIR"/testmap.bin $CIRCLE_ARTIFACTS/maps/
 
     # ------ cleanup -------------
     - mkdir $CIRCLE_ARTIFACTS/job_logs
