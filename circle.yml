@@ -88,13 +88,13 @@ compile:
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ldd maptool
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ls -al maptool
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; cp -v maptool $CIRCLE_ARTIFACTS/
-    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ./maptool
+    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ./maptool ; exit 0
     
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; gcc -static -O2 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -lpthread -Wall -Wcast-align -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wreturn-type -D_GNU_SOURCE  -o maptool_linux64_static maptool.o /usr/lib/libglib-2.0.a .libs/libmaptool.a /usr/lib/libgthread-2.0.a /usr/lib/libgmodule-2.0.a -ldl -lrt -lz ../.libs/libnavit.a -pthread -lgthread-2.0 -lrt -lglib-2.0   -Wl,--export-dynamic -pthread -lgmodule-2.0 -lrt -lglib-2.0 -lz p2t/.libs/libp2tc.a refine/.libs/libp2tc-refine.a libcfu-0.03-zanavi/src/libcfu.a -lm
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ls -al maptool_linux64_static
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ldd maptool_linux64_static ; exit 0
     - cd "$_MT_BUILDDIR" ; cd navit/maptool ; cp -v maptool_linux64_static $CIRCLE_ARTIFACTS/
-    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ./maptool_linux64_static
+    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ./maptool_linux64_static ; exit 0
 test:
   override:
     - echo "dummy"
