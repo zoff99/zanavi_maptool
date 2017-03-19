@@ -81,8 +81,13 @@ compile:
     - echo '' > /home/ubuntu/zanavi_maptool/zanavi/navit/coffeecatch.c
     - echo '' > /home/ubuntu/zanavi_maptool/zanavi/navit/coffeejni.c
     - sudo ln -sf /usr/include/freetype2 /usr/include/freetype
+    - sed -i -e 's#type_ramp#9999999#' /home/ubuntu/zanavi_maptool/zanavi/navit/maptool/ch.c
+    - sed -i -e 's#type_ramp#9999999#' /home/ubuntu/zanavi_maptool/zanavi/navit/maptool/misc.c
     - cd "$_MT_BUILDDIR" ; . ~/cflags.txt ; export CC="gcc" ; export CXX="g++" ; cd navit && make && make version.h
     - cd "$_MT_BUILDDIR" ; . ~/cflags.txt ; export CC="gcc" ; export CXX="g++" ; cd navit/maptool && make
+    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ldd maptool
+    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; ls -al maptool
+    - cd "$_MT_BUILDDIR" ; cd navit/maptool ; cp -v maptool $CIRCLE_ARTIFACTS/
 test:
   override:
     - echo "dummy"
