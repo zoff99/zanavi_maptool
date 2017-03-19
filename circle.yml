@@ -58,7 +58,8 @@ dependencies:
 compile:
   override:
     echo "dummy"
-tests:
+
+test:
   override:
     echo "dummy"
 
