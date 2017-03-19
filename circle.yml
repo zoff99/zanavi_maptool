@@ -16,6 +16,17 @@ machine:
     _BUILD_TYPE_: 1
 ###############################
 
+###############################
+#   build variant:
+#
+#   0 -> *not used now*
+#   1 -> release
+#   2 -> debug
+#
+    _BUILD_VARIANT_: 2
+###############################
+
+
 dependencies:
   pre:
     ### ------- DO NOT EDIT -------
@@ -61,7 +72,10 @@ dependencies:
     - mkdir -p "$_MT_RUNDIR"
 compile:
   override:
-    - echo "dummy"
+    - cd "$_MT_BUILDDIR" && rm -Rf *
+    - echo "$_BUILD_VARIANT_"
+    - if [ "$_BUILD_VARIANT_""x" == "2x" ]; then export CFLAGS=" -finline-limit=1 -fkeep-inline-functions -O0 -DNO_GTYPES_ -DPLUGSSS -g -DONLY_C_BORDER -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -ldl -lpthread "; export CFLAGS=" -DNAVIT_TRANS_LAT_LON_GEO_NOFUNCS -DMAPTOOL ""$CFLAGS" ; echo -n 'export CFLAGS="' > ~/cflags.txt ; echo "$CFLAGS" >> ~/cflags.txt ; else export CFLAGS=" -O2 -DONLY_C_BORDER -D_FILE_OFFSET_BITS=64 -DNO_GTYPES_ -DPLUGSSS -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -lpthread -ldl " ; export CFLAGS=" -DNAVIT_TRANS_LAT_LON_GEO_NOFUNCS -DMAPTOOL ""$CFLAGS" ; echo -n 'export CFLAGS="' > ~/cflags.txt ; echo "$CFLAGS" >> ~/cflags.txt ; fi
+    - cat ~/cflags.txt
 
 test:
   override:
