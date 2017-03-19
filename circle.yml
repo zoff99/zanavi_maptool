@@ -4,8 +4,8 @@ machine:
 
   environment:
     ZANAVI_VERSION_HASH: 2ad2837014531be2a17be7320733e5cff71fdc3b
-    _MT_BUILDDIR: ~/maptool_build
-    _MT_RUNDIR: ~/maptool_run
+    _MT_BUILDDIR: /home/ubuntu/maptool_build
+    _MT_RUNDIR: /home/ubuntu/maptool_run
 ###############################
 #   build type:
 #
