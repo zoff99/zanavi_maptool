@@ -63,6 +63,7 @@ dependencies:
     - sudo apt-get install autoconf
     - sudo apt-get install telnet
     - sudo apt-get install qrencode
+    - sudo apt-get install automake1.11
 
     - git clone https://github.com/zoff99/zanavi
     - cd zanavi; git checkout "$ZANAVI_VERSION_HASH"
