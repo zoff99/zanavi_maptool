@@ -1,0 +1,71 @@
+machine:
+  timezone:
+    Europe/Berlin
+
+  environment:
+    ZANAVI_VERSION_HASH: 2ad2837014531be2a17be7320733e5cff71fdc3b
+###############################
+#   build type:
+#
+#   0 -> *not used now*
+#   1 -> build
+#   3 -> build + run-tests
+#
+    _BUILD_TYPE_: 1
+###############################
+
+dependencies:
+  pre:
+    ### ------- DO NOT EDIT -------
+    ### ------- scripts for _BUILD_TYPE_ type check -------
+    - echo 'if [ $_BUILD_TYPE_ -lt 1 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_bt1 ; chmod a+rx ~/_bt1
+    - echo 'if [ $_BUILD_TYPE_ -lt 2 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_bt2 ; chmod a+rx ~/_bt2
+    - echo 'if [ $_BUILD_TYPE_ -lt 3 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_bt3 ; chmod a+rx ~/_bt3
+
+    - echo 'if [ $_BUILD_TYPE_ -gt 1 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_xbt1 ; chmod a+rx ~/_xbt1
+    - echo 'if [ $_BUILD_TYPE_ -gt 2 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_xbt2 ; chmod a+rx ~/_xbt2
+    - echo 'if [ $_BUILD_TYPE_ -gt 3 ]; then echo "=BT=:SKIP [""$_BUILD_TYPE_""]" ; exit 0 ; else echo "=BT=:""$_BUILD_TYPE_" ; fi' > ~/_xbt3 ; chmod a+rx ~/_xbt3
+
+    - wget 'https://raw.githubusercontent.com/zoff99/android_sdk_install_wrapper/master/__sdk_update__.sh' -O ~/__sdk_update__.sh
+    - chmod a+rx ~/__sdk_update__.sh
+
+    - printf '#! /bin/bash\n pgrep -l "$1"\n kill -9 $(pgrep "$1" | grep -v ^$$\$)\n pgrep -l -f "$1"\n' > ~/pkill2.sh
+    - chmod a+rx ~/pkill2.sh
+    ### ------- scripts for _BUILD_TYPE_ type check -------
+    ### ------- DO NOT EDIT -------
+
+    - sudo apt-get update
+    - sudo apt-get install libpng12-dev
+    - sudo apt-get install g++
+    - sudo apt-get install gettext
+    - sudo apt-get install libsaxonb-java
+    - sudo apt-get install lib32stdc++6
+    - sudo apt-get install lib32z1
+    - sudo apt-get install zip
+    - sudo apt-get install bc
+    - sudo apt-get install mtools
+    - sudo apt-get install libmagickcore5 ; exit 0
+    - sudo apt-get install perlmagick ; exit 0
+    - sudo apt-get install liblwp-useragent-determined-perl
+    - sudo apt-get install autoconf
+    - sudo apt-get install telnet
+    - sudo apt-get install qrencode
+
+    - git clone https://github.com/zoff99/zanavi
+    - cd zanavi; git checkout "$ZANAVI_VERSION_HASH"
+    - cd zanavi; ls -al
+
+compile:
+  override:
+    echo "dummy"
+tests:
+  override:
+    echo "dummy"
+
+    # ------ cleanup -------------
+    - mkdir $CIRCLE_ARTIFACTS/job_logs
+    - mv -v $CIRCLE_ARTIFACTS/stderr_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/
+    - mv -v $CIRCLE_ARTIFACTS/stdout_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/
+    # ------ cleanup -------------
+
+
