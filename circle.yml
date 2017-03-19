@@ -57,11 +57,11 @@ dependencies:
 
 compile:
   override:
-    echo "dummy"
+    - echo "dummy"
 
 test:
   override:
-    echo "dummy"
+    - echo "dummy"
 
     # ------ cleanup -------------
     - mkdir $CIRCLE_ARTIFACTS/job_logs
