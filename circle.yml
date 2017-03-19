@@ -4,6 +4,8 @@ machine:
 
   environment:
     ZANAVI_VERSION_HASH: 2ad2837014531be2a17be7320733e5cff71fdc3b
+    _MT_BUILDDIR: ~/maptool_build
+    _MT_RUNDIR: ~/maptool_run
 ###############################
 #   build type:
 #
@@ -55,6 +57,8 @@ dependencies:
     - cd zanavi; git checkout "$ZANAVI_VERSION_HASH"
     - cd zanavi; ls -al
 
+    - mkdir -p "$_MT_BUILDDIR"
+    - mkdir -p "$_MT_RUNDIR"
 compile:
   override:
     - echo "dummy"
