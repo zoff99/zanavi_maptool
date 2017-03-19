@@ -83,8 +83,8 @@ test:
 
     # ------ cleanup -------------
     - mkdir $CIRCLE_ARTIFACTS/job_logs
-    - mv -v $CIRCLE_ARTIFACTS/stderr_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/
-    - mv -v $CIRCLE_ARTIFACTS/stdout_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/
+    - mv -v $CIRCLE_ARTIFACTS/stderr_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/ ; exit 0
+    - mv -v $CIRCLE_ARTIFACTS/stdout_circle_*.txt $CIRCLE_ARTIFACTS/job_logs/ ; exit 0
     # ------ cleanup -------------
 
 
