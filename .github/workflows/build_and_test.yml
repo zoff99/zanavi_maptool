@@ -1,0 +1,33 @@
+name: github_build_and_test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux-build-n-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt-get update && \
+          sudo DEBIAN_FRONTEND=noninteractive apt-get remove g++ && \
+          sudo DEBIAN_FRONTEND=noninteractive \
+          apt-get install -y --no-install-recommends \
+          ca-certificates \
+          g++ \
+          gettext \
+          libsaxonb-java \
+          cmake \
+          git \
+          wget
+      - run: git clone https://github.com/zoff99/zanavi
+      - run: cd zanavi; ls -al
+      - run: wget http://download.geofabrik.de/europe/switzerland-latest.osm.bz2 -O ~/testmap.osm.bz2
+      - run: CFLAGS=" -finline-limit=1 -fkeep-inline-functions -O0 -DNO_GTYPES_ -DPLUGSSS -g -DONLY_C_BORDER -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -ldl -lpthread " \
+             export CFLAGS=" -DNAVIT_TRANS_LAT_LON_GEO_NOFUNCS -DMAPTOOL ""$CFLAGS" \
+             echo -n 'export CFLAGS="' > ~/cflags.txt \
+             echo "$CFLAGS"'"' >> ~/cflags.txt
+      - run: cat ~/cflags.txt
+
+
